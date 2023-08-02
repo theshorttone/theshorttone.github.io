@@ -59,7 +59,7 @@
                         }else {
                             total_guesses = total_guesses - 1;
                             $("#numleft").html(total_guesses);
-                    if (total_guesses < 0 ){
+                    if (total_guesses == 0 ){
                         $("#error_msg").html("You are out of guesses. Ha Loser ")
                     }}
                     if (blanks == word){
