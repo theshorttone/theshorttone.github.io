@@ -26,9 +26,7 @@
                     guesses = guesses + id;
                     $("#" + id).css('text-decoration', 'line-through');
                     
-                        
-
-                        $("#numleft").html(total_guesses);
+                    
                     
                         if (word.includes(id)){
                            
@@ -38,6 +36,7 @@
                             $("#word").html(blanks);
                         }else {
                             total_guesses = total_guesses - 1;
+                            $("#numleft").html(total_guesses);
                     if (total_guesses < 0 ){
                         $("#error_msg").html("You are out of guesses. Ha Loser ")
                     }}
