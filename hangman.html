@@ -15,18 +15,22 @@
     
 
         
+        // Function from chat GTP to generate a random number between min (inclusive) and max (exclusive)
+        function getRandomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
 
-public class RandomNumberExample {
-    public static void main(String[] args) {
-        // Create a Random object
-        Random random = new Random();
+        // Get a random number between 1 and 10
+        //could make it use length of array in future
+        var randomNumber = getRandomNumber(0, 4); // Generates a random number between 1 and 10
 
-        // Generate a random integer between 0 (inclusive) and 4 (exclusive)
-        int x = random.nextInt(5);
-        //this random number will select the index of the wordlist
-    }}
-        var word = wordlist.get(x)
-        var blanks = blanklist.get(x)
+
+  
+
+
+        
+        var word = wordlist.get(randomNumber)
+        var blanks = blanklist.get(randomNumber)
         
             var total_guesses = 10;
             //var word = "f i s h";
