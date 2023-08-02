@@ -33,6 +33,7 @@
                         $("#numleft").html(total_guesses);
                     
                         if (word.includes(id)){
+                            total_guesses = total_guesses + 1
                             var index = word.indexOf(id);
                             console.log("letter" + id + "is at index" + index);
                             blanks = blanks.substr(0, index) + id + blanks.substr(index +1);
