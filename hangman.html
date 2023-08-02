@@ -25,22 +25,22 @@
                 } else {
                     guesses = guesses + id;
                     $("#" + id).css('text-decoration', 'line-through');
-                    total_guesses = total_guesses - 1;
-                    if (total_guesses < 0 ){
-                        $("#error_msg").html("You are out of guesses. Ha Loser ")
+                    
                         
-                    } else {
+                    else {
                         $("#numleft").html(total_guesses);
                     
                         if (word.includes(id)){
-                            total_guesses = total_guesses + 1
+                           
                             var index = word.indexOf(id);
                             console.log("letter" + id + "is at index" + index);
                             blanks = blanks.substr(0, index) + id + blanks.substr(index +1);
                             $("#word").html(blanks);
-                            
-                    
-                        }
+                        }else {
+                            total_guesses = total_guesses - 1;
+                    if (total_guesses < 0 ){
+                        $("#error_msg").html("You are out of guesses. Ha Loser ")
+                    }}
                     if (blanks == word){
                         $("#error_msg").text("You Won, not too shabby");
                     }
