@@ -36,7 +36,7 @@
                             var index = word.indexOf(id);
                             console.log("letter" + id + "is at index" + index);
                             blanks = blanks.substr(0, index) + id + blanks.substr(index +1);
-                            $("word").html(blanks);
+                            $("#word").html(blanks);
                         }
                     if (blanks == word){
                         $("#error_msg").text("You Won, not too shabby");
