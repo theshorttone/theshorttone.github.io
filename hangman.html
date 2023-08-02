@@ -3,6 +3,22 @@
 <head>
     <Title> Hangman</Title>   
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(
+            function() {
+
+                $(".letter").click(
+                    function() {
+                var id = $(this).attr('id');
+                console.log ("Clicked on " + id);
+                        
+                    })
+                
+
+
+                
+            });
+    </script>
 </head>
 <body>
 <H1>HANGMAN!</H1>
