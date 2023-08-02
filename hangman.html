@@ -43,7 +43,7 @@
                 var id = $(this).attr('id');
                 console.log ("Clicked on " + id);
                 if (guesses.includes(id)) {
-                    $("error_msg").html("You already guessed that");
+                    $("#error_msg").html("You already guessed that");
                     console.log (guesses);
                 } else {
                     guesses = guesses + id;
