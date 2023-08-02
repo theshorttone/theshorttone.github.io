@@ -9,9 +9,27 @@
             
     function() {
 
+            let wordlist = New Array("word", "spoke", "climb", "mushrom", "single")
+            let blanklist = New Array("_ _ _ _", "_ _ _ _ _", "_ _ _ _ _", "_ _ _ _ _ _ _", "_ _ _ _ _ _" )
+
+
+        import java.util.Random;
+
+public class RandomNumberExample {
+    public static void main(String[] args) {
+        // Create a Random object
+        Random random = new Random();
+
+        // Generate a random integer between 0 (inclusive) and 4 (exclusive)
+        int x = random.nextInt(5);
+        //this random number will select the index of the wordlist
+
+        var word = wordlist.get(x)
+        var blanks = blanklist.get(x)
+        
             var total_guesses = 10;
-            var word = "f i s h";
-            var blanks = "_ _ _ _";
+            //var word = "f i s h";
+           // var blanks = "_ _ _ _";
             var guesses = " ";
         
             $("#word").html(blanks);
