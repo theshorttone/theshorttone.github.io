@@ -44,6 +44,7 @@
                 console.log ("Clicked on " + id);
                 if (guesses.includes(id)) {
                     $("error_msg").html("You already guessed" + id);
+                    console.log (guesses);
                 } else {
                     guesses = guesses + id;
                     $("#" + id).css('text-decoration', 'line-through');
