@@ -26,8 +26,9 @@
                     total_guesses = total_guesses - 1;
                     if (total_guesses <= 0 ){
                         $("#error_msg").html("You are out of guesses. Ha Loser ")
+                        
                     } else {
-                    $(#"numleft").html(total_guesses);
+                        $("#numleft").html(total_guesses);
                     
                         if (word.includes(id)){
                             var index = word.indexOf(id);
