@@ -5,12 +5,22 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         $(document).ready(
-            function() {
 
+            
+    function() {
+
+            var total_guesses = 10;
+            var world = "f i s h";
+            var blanks = "_ _ _ _";
+            var guesses = " ";
+                
                 $(".letter").click(
-                    function() {
+             function() {
                 var id = $(this).attr('id');
                 console.log ("Clicked on " + id);
+                if (guesses.include (id)) {
+                    $("error_msg").html("You already guessed" + id);
+                }
                         
                     })
                 
