@@ -13,7 +13,9 @@
             var world = "f i s h";
             var blanks = "_ _ _ _";
             var guesses = " ";
-                
+        
+            $("#word").html(blanks);
+        
                 $(".letter").click(
              function() {
                 var id = $(this).attr('id');
