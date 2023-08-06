@@ -26,6 +26,13 @@
                     zoom: 15, 
                     layers: [OpenStreetMap_HOT]
                         })
+
+L.geoJson(rivers_geojson,
+          {color: "blue",
+           weight: 5,
+           opacity: .5}).addTo(map);
+           
+                
                 }
         </script>
     </head>
