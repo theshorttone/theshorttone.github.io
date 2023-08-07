@@ -55,14 +55,16 @@
                 }
             });
 
-        $("#togglerivers").click(function() {})
-            if (riversVisible) {
-                riversVisible = false;
-                riverlayer.removeFrom(map);
-            }else{riversVisible = true;
-                  riversLayers.addTo(map);
-            }
-        }
+        $("#togglerivers").click(function() {
+    if (riversVisible) {
+        riversVisible = false;
+        riverlayer.removeFrom(map);
+    } else {
+        riversVisible = true;
+        riverlayer.addTo(map);
+    }
+});}
+
     </script>
 </head>
 
