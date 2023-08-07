@@ -24,10 +24,16 @@
                 var linewidth = 2;
                 var linecolor = "black";
 
-                if (class == "community" ){linecolor = "red}
-                if (class == "rural-community" ){linecolor = "yellow}
-                if (class == "rural" ){linecolor = "green}
-                    }
+                if (class == "community" ){linecolor = "red;}
+                if (class == "rural-community" ){linecolor = "yellow;}
+                if (class == "rural" ){linecolor = "green;}
+
+                return{ 
+                    color: linecolor,
+                    weight: linewidth,
+                    opacity: .5 };
+                                      
+                                      }
             function initialize() {
                 var map = L.map('map', {
                     center: [43.7034, -72.2887], 
