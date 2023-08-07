@@ -10,6 +10,7 @@
     </style>
 
     <script src="NH_Designated_Rivers_24K.geojson"></script>
+        <script src = "NH -Historic_and_Cultural_Features_(RT_16).geojson"></script>
 
         
         <script>
@@ -36,12 +37,12 @@ L.geoJson(rivers_geojson,
            }
           }).addTo(map);
 
-L.geoJson(soil_data,
+L.geoJson(cultural_sites,
           {color: "green",
            weight: 2,
            opacity: .3,
            onEachFeature: function(feature, layer) {
-               layer.bindPopup("<b>Farmable land??: "+ feature.properties.farmlndcl + "</b>")
+               layer.bindPopup("<b>site name: "+ feature.properties.RESNAME + "</b>")
            }
           }).addTo(map);
                 
