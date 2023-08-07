@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello New Hampshire!</title>
+            <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+         #map {height: 400px; width: 700px; }
+           html, body {height: 100%; margin: 0, padding: 0;}
+    </style>
+
+    <script src="NH_Designated_Rivers_24K.geojson"></script>
+        <script src = "NH -Historic_and_Cultural_Features_(RT_16).geojson"></script>
+
+        
+        <script>
+            
+            var OpenStreetMap_HOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+            { maxZoom: 19, 
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href = "http://hot.osm.org"> HOT OSM</a>'
+                     })
+
+            
+            function initialize() {
+                var map = L.map('map', {
+                    center: [43.7034, -72.2887], 
+                    zoom: 10, 
+                    layers: [OpenStreetMap_HOT]
+                        })
+
+L.geoJson(rivers_geojson,
+          {color: "blue",
+           weight: 5,
+           opacity: .5,
+           onEachFeature: function(feature, layer) {
+               layer.bindPopup("<b>River name and section: "+ feature.properties.River_Sect + "</b>")
+           }
+          }).addTo(map);
+
+L.geoJson(cultural_sites,
+          {color: "green",
+           weight: 2,
+           opacity: .3,
+           onEachFeature: function(feature, layer) {
+               layer.bindPopup("<b>site name: "+ feature.properties.RESNAME + "</b>")
+           }
+          }).addTo(map);
+                
+                }
+        </script>
+    </head>
+    
+    <body onload="initialize()">
+      <h1>Hello Campus!</h1>
+      <div id="map"></div>
+    </body>
+    
+</html>
