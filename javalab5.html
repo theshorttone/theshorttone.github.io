@@ -1,70 +1,58 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Hello New Hampshire!</title>
-            <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<head>
+    <title>Hello New Hampshire!</title>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <style>
-         #map {height: 400px; width: 700px; }
-           html, body {height: 100%; margin: 0, padding: 0;}
+        #map {height: 400px; width: 700px; }
+        html, body {height: 100%; margin: 0, padding: 0;}
     </style>
 
     <script src="NH_Designated_Rivers_24K.geojson"></script>
 
-        
-        <script>
-            
-            var OpenStreetMap_HOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
-            { maxZoom: 19, 
+    <script>
+        var OpenStreetMap_HOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+            maxZoom: 19, 
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href = "http://hot.osm.org"> HOT OSM</a>'
-                     })
+        });
 
-            function lineSymbology (feature) {
-                var class = feature.properties.Class;
-                var linewidth = 2;
-                var linecolor = "black";
+        function lineSymbology(feature) {
+            var classValue = feature.properties.Class;
+            var linewidth = 2;
+            var linecolor = "black";
 
-                if (class == "community" ){linecolor = "red;}
-                if (class == "rural-community" ){linecolor = "yellow;}
-                if (class == "rural" ){linecolor = "green;}
+            if (classValue == "community") { linecolor = "red"; }
+            if (classValue == "rural-community") { linecolor = "yellow"; }
+            if (classValue == "rural") { linecolor = "green"; }
 
-                return{ 
-                    color: linecolor,
-                    weight: linewidth,
-                    opacity: .5 };
-                                      
-                                      }
-            function initialize() {
-                var map = L.map('map', {
-                    center: [43.7034, -72.2887], 
-                    zoom: 10, 
-                    layers: [OpenStreetMap_HOT]
-                        })
+            return { 
+                color: linecolor,
+                weight: linewidth,
+                opacity: 0.5
+            };
+        }
 
-riverlayer = L.geoJson(rivers_geojson,
-          {style: lineSymbology,
-           onEachFeature: function(feature, layer) {
-               layer.bindPopup("<b>River name and section: "+ feature.properties.River_Sect + "</b><br>"+
-                              "population density:" + feature.properties.Class);
-           }
-          }).addTo(map); }
+        function initialize() {
+            var map = L.map('map', {
+                center: [43.7034, -72.2887], 
+                zoom: 10, 
+                layers: [OpenStreetMap_HOT]
+            });
 
-// L.geoJson(cultural_sites,
-//           {color: "green",
-//            weight: 2,
-//            opacity: .3,
-//            onEachFeature: function(feature, layer) {
-//                layer.bindPopup("<b>site name: "+ feature.properties.RESNAME + "</b>")
-//            }
-//           }).addTo(map);
-                
-                
-        </script>
-    </head>
-    
-    <body onload="initialize()">
-      <h1>Hello Campus!</h1>
-      <div id="map"></div>
-    </body>
-    
+            riverlayer = L.geoJson(rivers_geojson, { // Assuming NH_Designated_Rivers_24K is the loaded GeoJSON data
+                style: lineSymbology,
+                onEachFeature: function(feature, layer) {
+                    layer.bindPopup("<b>River name and section: " + feature.properties.River_Sect + "</b><br>" +
+                                    "population density: " + feature.properties.Class);
+                }
+            }).addTo(map);
+        }
+    </script>
+</head>
+
+<body onload="initialize()">
+    <h1>Hello Campus!</h1>
+    <div id="map"></div>
+</body>
 </html>
