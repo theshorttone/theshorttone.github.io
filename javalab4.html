@@ -35,7 +35,15 @@ L.geoJson(rivers_geojson,
                layer.bindPopup("<b>River name and section: "+ feature.properties.River_Sect + "</b>")
            }
           }).addTo(map);
-           
+
+L.geoJson(soil_data,
+          {color: "green",
+           weight: 2,
+           opacity: .3,
+           onEachFeature: function(feature, layer) {
+               layer.bindPopup("<b>Farmable land??: "+ feature.properties.farmlndcl + "</b>")
+           }
+          }).addTo(map);
                 
                 }
         </script>
