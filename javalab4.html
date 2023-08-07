@@ -31,7 +31,7 @@ L.geoJson(rivers_geojson,
           {color: "blue",
            weight: 5,
            opacity: .5,
-           onEachFeature: function(feature, Layer) {
+           onEachFeature: function(feature, layer) {
                layer.bindPopup("<b>River name and section: "+ nfeature.properties.River_Sect + "</b>")
            }
           }).addTo(map);
