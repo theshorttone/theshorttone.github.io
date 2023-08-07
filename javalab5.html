@@ -10,7 +10,6 @@
     </style>
 
     <script src="NH_Designated_Rivers_24K.geojson"></script>
-        <script src = "NH -Historic_and_Cultural_Features_(RT_16).geojson"></script>
 
         
         <script>
@@ -44,7 +43,7 @@ L.geoJson(rivers_geojson,
                layer.bindPopup("<b>River name and section: "+ feature.properties.River_Sect + "</b><br>"+
                               "population density:" + feature.properties.Class);
            }
-          }).addTo(map);
+          }).addTo(map); }
 
 // L.geoJson(cultural_sites,
 //           {color: "green",
@@ -55,7 +54,7 @@ L.geoJson(rivers_geojson,
 //            }
 //           }).addTo(map);
                 
-                }
+                
         </script>
     </head>
     
