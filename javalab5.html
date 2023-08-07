@@ -20,7 +20,15 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href = "http://hot.osm.org"> HOT OSM</a>'
                      })
 
-            
+            function lineSymbology (feature) {
+                var class = feature.properties.Class;
+                var linewidth = 2;
+                var linecolor = "black"
+
+                if (class == "community" ){linecolor = "red}
+                if (class == "rural-community" ){linecolor = "yellow}
+                if (class == "rural" ){linecolor = "green}
+                    }
             function initialize() {
                 var map = L.map('map', {
                     center: [43.7034, -72.2887], 
@@ -33,18 +41,19 @@ L.geoJson(rivers_geojson,
            weight: 5,
            opacity: .5,
            onEachFeature: function(feature, layer) {
-               layer.bindPopup("<b>River name and section: "+ feature.properties.River_Sect + "</b>")
+               layer.bindPopup("<b>River name and section: "+ feature.properties.River_Sect + "</b><br>"+
+                              "population density:" + feature.properties.Class);
            }
           }).addTo(map);
 
-L.geoJson(cultural_sites,
-          {color: "green",
-           weight: 2,
-           opacity: .3,
-           onEachFeature: function(feature, layer) {
-               layer.bindPopup("<b>site name: "+ feature.properties.RESNAME + "</b>")
-           }
-          }).addTo(map);
+// L.geoJson(cultural_sites,
+//           {color: "green",
+//            weight: 2,
+//            opacity: .3,
+//            onEachFeature: function(feature, layer) {
+//                layer.bindPopup("<b>site name: "+ feature.properties.RESNAME + "</b>")
+//            }
+//           }).addTo(map);
                 
                 }
         </script>
