@@ -7,11 +7,15 @@
     <style>
         #map {height: 400px; width: 700px; }
         html, body {height: 100%; margin: 0, padding: 0;}
+        #buttons {padding: 10px; background: #f3d1c9;}
+        
     </style>
 
     <script src="NH_Designated_Rivers_24K.geojson"></script>
 
     <script>
+        var riverlayer;
+        var trailsVisible = false;
         var OpenStreetMap_HOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
             maxZoom: 19, 
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href = "http://hot.osm.org"> HOT OSM</a>'
@@ -47,7 +51,15 @@
                     layer.bindPopup("<b>River name and section: " + feature.properties.River_Sect + "</b><br>" +
                                     "population density: " + feature.properties.Class);
                 }
-            }).addTo(map);
+            });
+
+        $("#togglerivers").click(function() {})
+            if (riversVisible) {
+                riversVisible = false;
+                riverlayer.removeFrom(map);
+            }else{trailsVisible = true;
+                  trailsLayers.addTo(map);
+            }
         }
     </script>
 </head>
@@ -55,5 +67,9 @@
 <body onload="initialize()">
     <h1>Hello Campus!</h1>
     <div id="map"></div>
+        <div id="buttons"></div>
+        <button id= "toggleTrails">Toggle the River layer!</button>
+    
+
 </body>
 </html>
