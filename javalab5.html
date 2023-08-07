@@ -41,10 +41,8 @@
                     layers: [OpenStreetMap_HOT]
                         })
 
-L.geoJson(rivers_geojson,
-          {color: "blue",
-           weight: 5,
-           opacity: .5,
+riverlayer = L.geoJson(rivers_geojson,
+          {style: lineSymbology,
            onEachFeature: function(feature, layer) {
                layer.bindPopup("<b>River name and section: "+ feature.properties.River_Sect + "</b><br>"+
                               "population density:" + feature.properties.Class);
