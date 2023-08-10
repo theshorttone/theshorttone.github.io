@@ -1,1 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello New Hampshire!</title>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        #map {height: 400px; width: 700px; }
+        html, body {height: 100%; margin: 0, padding: 0;}
+        #buttons {padding: 10px; background: #f3d1c9;}
+        
+    </style>
+
+    <script src="Hevella_observations.geojson"></script>
+
+    <script>
+        var helvella_layer;
+        var helvellavisible = false;
+        // var OpenStreetMap_HOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+        //     maxZoom: 19, 
+        //     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href = "http://hot.osm.org"> HOT OSM</a>'
+// });
+	    var OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+	maxZoom: 17,
+	attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+});
+       
+
+        function initialize() {
+            var map = L.map('map', {
+                center: [34.0522, -118.2437], 
+                zoom: 8, 
+                layers: [OpenTopoMap]
+            });
+
+            helvellalayer = L.geoJson(helvella_data, { // from geogspon
+                onEachFeature: function(feature, layer) {
+                    layer.bindPopup("<b>Mushroom common name: " + feature.common_name + "</b>");
+                }
+            });
+
+        $("#togglehellvella").click(function() {
+    if (helvellavisible) {
+        helvellavisible = false;
+        helvellavisible.removeFrom(map);
+    } else {
+        helvellavisible = true;
+        helvellavisible.addTo(map);
+    }
+});}
+
+    </script>
+</head>
+
+<body onload="initialize()">
+    <h1>Hello Campus!</h1>
+    <div id="map"></div>
+        <div id="buttons"></div>
+        <button id= "togglehelvella">Click to show Helvella!</button>
+    
+
+</body>
+</html>
