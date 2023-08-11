@@ -1,12 +1,11 @@
 p{ font-family: times new roman; background-color: #f5f5f5;}
 h3 {font-family: impact; background-color: #F0F8FF;}
 
-#title_pic { border: Blue dashed;
-            padding: 20px;
-            margin: 20px;
-            height: 550px;
-            width: 400px;
-            background-color: #ADD8E6;
+#title_pic { 
+            padding: 10px;
+            margin: 10px;
+            height: 100%;
+            width: 100%;
             color: black;
             float: right 
             }
