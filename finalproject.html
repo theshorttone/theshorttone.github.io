@@ -80,6 +80,23 @@ function initialize() {
         }
     });
     
+    $.ajax({
+    url: "Helvelladata.geojson",
+    dataType: "json",
+    success: function(data) {
+        console.log("Fungi data loaded for heatmap!");
+        helvella_heatmap = L.heatLayer(data.features.map(function(feature) {
+            return [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
+        }), { radius: 20 });
+
+        // ... (rest of your code)
+    },
+    error: function(xhr) {
+        alert(xhr.statusText);
+    }
+});
+
+    
  $("#togglehelvella").click(function() {
                 if (helvellavisible) {
                     helvellavisible = false;
