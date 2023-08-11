@@ -19,6 +19,12 @@ h3 {font-family: impact; background-color: #F0F8FF;}
     text-transform:uppercase;
 }
 
+.ptext .border{
+    background-color: #111;
+    color: #fff;
+    padding: 20px;
+}
+
 /* #title_pic {
             height: 100%; width: 100%; opacity: 30%
 } */
