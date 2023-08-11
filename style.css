@@ -12,7 +12,7 @@ h3 {font-family: impact; background-color: #F0F8FF;}
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center center;
-            opacity: 30%;
+            background-opacity: 10%;
             
             }
 /* #title_pic {
