@@ -63,7 +63,6 @@ function initialize() {
         zoom: 8, 
         layers: [OpenTopoMap]
     });
-
    $.ajax({
         url: "Helvelladata.geojson",
         dataType: "json",
@@ -79,22 +78,21 @@ function initialize() {
             alert(xhr.statusText);
         }
     });
-    var data;
-    $.ajax({
-    url: "Helvelladata.geojson",
-    dataType: "json",
-    success: function(data) {
-        console.log("Fungi data loaded for heatmap!");
-        helvella_heatmap = L.heatLayer(data.features.map(function(feature) {
-            return [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
-        }), { radius: 20 });
+//     $.ajax({
+//     url: "Helvelladata.geojson",
+//     dataType: "json",
+//     success: function(data) {
+//         console.log("Fungi data loaded for heatmap!");
+//         helvella_heatmap = L.heatLayer(data.features.map(function(feature) {
+//             return [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
+//         }), { radius: 20 });
 
-        // ... (rest of your code)
-    },
-    error: function(xhr) {
-        alert(xhr.statusText);
-    }
-});
+//         // ... (rest of your code)
+//     },
+//     error: function(xhr) {
+//         alert(xhr.statusText);
+//     }
+// });
 
     
  $("#togglehelvella").click(function() {
@@ -107,19 +105,19 @@ function initialize() {
                 }
             });
     
-    $("#toggleheatmap").click(function() {
-        if (map.hasLayer(helvella_layer)) {
-            map.removeLayer(helvella_layer);
-        }
+   $("#toggleheatmap").click(function () {
+                if (map.hasLayer(helvella_layer)) {
+                    map.removeLayer(helvella_layer);
+                }
 
-        if (map.hasLayer(helvella_heatmap)) {
-            map.removeLayer(helvella_heatmap);
-        } else {
-            helvella_heatmap = L.heatLayer(data.features.map(function(feature) {
-                return [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
-            }), { radius: 20 });
+                if (map.hasLayer(helvella_heatmap)) {
+                    map.removeLayer(helvella_heatmap);
+                } else {
+                    helvella_heatmap = L.heatLayer(data.features.map(function (feature) {
+                        return [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
+                    }), { radius: 20 });
 
-            helvella_heatmap.addTo(map);
+                    helvella_heatmap.addTo(map);
         }
     });
 }
