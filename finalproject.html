@@ -13,7 +13,6 @@
         
     </style>
 
-    <script src="Hevelladata.geojson"></script>
 
     <script>
 var helvella_layer;
@@ -30,7 +29,15 @@ function initialize() {
         zoom: 8, 
         layers: [OpenTopoMap]
     });
-
+    
+var helvella_data = $.ajax({
+              url: "Helvelladata.geojson",
+              dataType: "json",
+              success: console.log("fungi data loaded!"),
+              error: function(xhr) {alert(xhr.statusText);
+                                   }
+                });
+    
     helvella_layer = L.geoJson(helvella_data, {
         onEachFeature: function(feature, layer) {
             layer.bindPopup("<b>Mushroom common name: " + feature.common_name + "</b>");
