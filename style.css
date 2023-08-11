@@ -9,3 +9,6 @@ h3 {font-family: impact; background-color: #F0F8FF;}
             color: black;
             background-color: white;
             }
+#title_pic {
+            height: 100%; width: 100%; opacity-level: 10%
+}
