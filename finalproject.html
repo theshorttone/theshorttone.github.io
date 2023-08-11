@@ -49,7 +49,6 @@
 
     <script>
         
-var map;
 var helvella_layer;
 var helvellavisible = false;
 var helvella_heatmap;
@@ -59,13 +58,13 @@ var helvella_heatmap;
         });
 
 function initialize() {
-    map = L.map('map', {
+    var map = L.map('map', {
         center: [34.0522, -118.2437], 
         zoom: 8, 
         layers: [OpenTopoMap]
     });
 
-   var helvella_data = $.ajax({
+   $.ajax({
         url: "Helvelladata.geojson",
         dataType: "json",
         success: function(data) {
@@ -80,7 +79,17 @@ function initialize() {
             alert(xhr.statusText);
         }
     });
-
+    
+ $("#togglehelvella").click(function() {
+                if (helvellavisible) {
+                    helvellavisible = false;
+                    map.removeLayer(helvella_layer);
+                } else {
+                    helvellavisible = true;
+                    helvella_layer.addTo(map);
+                }
+            });
+    
     $("#toggleheatmap").click(function() {
         if (map.hasLayer(helvella_layer)) {
             map.removeLayer(helvella_layer);
