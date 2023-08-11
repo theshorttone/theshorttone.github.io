@@ -21,7 +21,6 @@ h3 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 100%;
     text-align: center;
     color: #000;
     font-size: 27px;
@@ -29,6 +28,7 @@ h3 {
     text-transform: uppercase;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 20px;
+    border-radius: 10px; 
 }
 
 .ptext .border {
