@@ -7,6 +7,18 @@ h3 {font-family: impact; background-color: #F0F8FF;}
             background-opacity: 10%;
             
             }
+
+.ptext {
+    position: absolute;
+    top:50%;
+    width:100%;
+    text-align: center;
+    color: #000;
+    font-size: 27px;
+    letter-spacing:8px;
+    text-transform:uppercase;
+}
+
 /* #title_pic {
             height: 100%; width: 100%; opacity: 30%
 } */
