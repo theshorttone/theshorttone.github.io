@@ -80,7 +80,7 @@ function initialize() {
             return [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
         }), { radius: 20 });
 
-    }
+    },
     error: function(xhr) {
         alert(xhr.statusText);
     }
