@@ -101,9 +101,6 @@ function initialize() {
                 if (map.hasLayer(helvella_heatmap)) {
                     map.removeLayer(helvella_heatmap);
                 } else {
-                    helvella_heatmap = L.heatLayer(data.features.map(function (feature) {
-                        return [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
-                    }), { radius: 20 });
 
                     helvella_heatmap.addTo(map);
                 }
