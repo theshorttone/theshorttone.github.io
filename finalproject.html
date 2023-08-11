@@ -18,6 +18,14 @@
 var helvella_layer;
 var helvellavisible = false;
 
+var helvella_data = $.ajax({
+              url: "Helvelladata.geojson",
+              dataType: "json",
+              success: console.log("fungi data loaded!"),
+              error: function(xhr) {alert(xhr.statusText);
+                                   }
+                });
+
 var OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
     maxZoom: 17,
     attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
@@ -30,13 +38,7 @@ function initialize() {
         layers: [OpenTopoMap]
     });
     
-var helvella_data = $.ajax({
-              url: "Helvelladata.geojson",
-              dataType: "json",
-              success: console.log("fungi data loaded!"),
-              error: function(xhr) {alert(xhr.statusText);
-                                   }
-                });
+
     
     helvella_layer = L.geoJson(helvella_data, {
         onEachFeature: function(feature, layer) {
