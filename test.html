@@ -77,6 +77,11 @@ function initialize() {
                     layer.bindPopup("<b>Mushroom common name: " + feature.properties.common_name + "</b>");
                 }
             });
+            helvella_heatmap = L.heatLayer(data.features.map(function (feature) {
+                return [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
+            }), { radius: 20 }); // Create heatmap layer
+
+    
 
             $("#togglehelvella").click(function() {
                 if (helvellavisible) {
