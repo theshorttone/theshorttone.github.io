@@ -1,36 +1,38 @@
-p{ font-family: times new roman; }
-h3 {font-family: impact; background-color: #F0F8FF;}
-
-.title {    
-            
-
-            background: url("https://cdn.pixabay.com/photo/2018/09/06/19/53/mushrooms-3659165_640.jpg");
-            min-height: 100%;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-attachment: fixed;
-
+p {
+    font-family: "Times New Roman", Times, serif;
 }
-            }
+
+h3 {
+    font-family: "Impact", sans-serif;
+    background-color: #F0F8FF;
+}
+
+.title {
+    background: url("https://cdn.pixabay.com/photo/2018/09/06/19/53/mushrooms-3659165_640.jpg");
+    min-height: 100vh; /* Use viewport height for minimum height */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+}
 
 .ptext {
     position: absolute;
-    top:50%;
-    width:100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
     text-align: center;
     color: #000;
     font-size: 27px;
-    letter-spacing:8px;
-    text-transform:uppercase;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
 }
 
-.ptext .border{
+.ptext .border {
     background-color: #111;
     color: #fff;
     padding: 20px;
 }
-
-/* #title_pic {
-            height: 100%; width: 100%; opacity: 30%
-} */
