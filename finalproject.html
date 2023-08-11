@@ -40,10 +40,12 @@ function initialize() {
     
 
     
+    console.log(helvella_data);
     helvella_layer = L.geoJson(helvella_data, {
-        console.log(helvella_data);
-        onEachFeature: function(feature, layer) {
-            layer.bindPopup("<b>Mushroom common name: " + feature.common_name + "</b>");
+    onEachFeature: function(feature, layer) {
+        layer.bindPopup("<b>Mushroom common name: " + feature.properties.common_name + "</b>");
+    }
+});
         }
     });
 
