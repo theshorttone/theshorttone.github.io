@@ -38,8 +38,8 @@
     <div id="buttons">
         <button id="togglehelvella">Click to show Helvella!</button>
     </div>
-    <div id="buttons">
-    <button id="togglehelvella">Click to show heatmap!</button>
+    
+   <div id="buttons">
     <label class="switch">
         <input type="checkbox" id="toggleheatmap">
         <span class="slider round"></span>
@@ -79,20 +79,11 @@
                 }
             });
 
-            $("#togglehelvella").click(function() {
-                if (helvellavisible) {
-                    helvellavisible = false;
-                    map.removeLayer(helvella_layer);
-                } else {
-                    helvellavisible = true;
-                    helvella_layer.addTo(map);
-                }
-            });
-            $("#toggleheatmap").click(function() {
+           $("#toggleheatmap").click(function() {
     if (map.hasLayer(helvella_layer)) {
         map.removeLayer(helvella_layer);
     }
-    
+
     if (map.hasLayer(helvella_heatmap)) {
         map.removeLayer(helvella_heatmap);
     } else {
@@ -103,6 +94,13 @@
         helvella_heatmap.addTo(map);
     }
 });
+
+
+
+
+
+
+
         }
     </script>
 </body>
