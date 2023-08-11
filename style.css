@@ -1,7 +1,7 @@
 p{ font-family: times new roman; }
 h3 {font-family: impact; background-color: #F0F8FF;}
 
-#title {    border: white;
+.title {    border: white;
 
             background: url("https://cdn.pixabay.com/photo/2018/09/06/19/53/mushrooms-3659165_640.jpg") center center cover no-repeat fixed;
             background-opacity: 10%;
