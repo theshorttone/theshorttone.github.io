@@ -86,9 +86,9 @@ function initialize() {
      $.ajax({
         url: "amanita_data.geojson",
         dataType: "json",
-        success: function(data_2) {
+        success: function(data) {
             console.log("Fungi data_2 loaded!");
-            helvella_layer = L.geoJson(data_2, {
+            helvella_layer = L.geoJson(data, {
                 onEachFeature: function(feature, layer) {
                     layer.bindPopup("<b>Mushroom common name: " + feature.properties.common_name + "</b>");
                 }
