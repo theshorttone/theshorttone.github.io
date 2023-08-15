@@ -84,11 +84,11 @@ function initialize() {
         }
     });
      $.ajax({
-        url: "Helvelladata.geojson",
+        url: "amanita_data.geojson",
         dataType: "json",
-        success: function(data) {
-            console.log("Fungi data loaded!");
-            helvella_layer = L.geoJson(data, {
+        success: function(data_2) {
+            console.log("Fungi data_2 loaded!");
+            helvella_layer = L.geoJson(data_2, {
                 onEachFeature: function(feature, layer) {
                     layer.bindPopup("<b>Mushroom common name: " + feature.properties.common_name + "</b>");
                 }
@@ -121,6 +121,15 @@ function initialize() {
                 } else {
                     helvellavisible = true;
                     helvella_layer.addTo(map);
+                }
+            });
+    $("#toggleamanita").click(function() {
+                if (amanitavisible) {
+                    amanitavisible = false;
+                    map.removeLayer(amanita_layer);
+                } else {
+                    amanitavisible = true;
+                    amanita_layer.addTo(map);
                 }
             });
     
