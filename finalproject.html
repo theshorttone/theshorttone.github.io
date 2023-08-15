@@ -88,7 +88,7 @@ function initialize() {
         dataType: "json",
         success: function(data) {
             console.log("Fungi data_2 loaded!");
-            helvella_layer = L.geoJson(data, {
+            amanita_layer = L.geoJson(data, {
                 onEachFeature: function(feature, layer) {
                     layer.bindPopup("<b>Mushroom common name: " + feature.properties.common_name + "</b>");
                 }
@@ -103,7 +103,7 @@ function initialize() {
 //     dataType: "json",
 //     success: function(data) {
 //         console.log("Fungi data loaded for heatmap!");
-//         helvella_heatmap = L.heatLayer(data.features.map(function(feature) {
+//         amanita_heatmap = L.heatLayer(data.features.map(function(feature) {
 //             return [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
 //         }), { radius: 20 });
 
