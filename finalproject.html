@@ -74,10 +74,17 @@ function initialize() {
         success: function(data) {
             console.log("Fungi data loaded!");
             helvella_layer = L.geoJson(data, {
-                onEachFeature: function(feature, layer) {
+                onEachFeature: function(feature, layer, latlng) {
+                    marker = L.marker(latlng, {icon:_____});
                     layer.bindPopup("<b>Mushroom common name: " + feature.properties.common_name + "</b>");
                 }
             });
+
+// sakeLayer = L.geoJson(sakes_geojson, {
+//                     pointToLayer: function(feature, latlng) {
+//                         marker = L.marker(latlng, {icon:MyIcon2
+//                         });
+            
         },
         error: function(xhr) {
             alert(xhr.statusText);
