@@ -51,6 +51,10 @@
 </div>
 
     <script>
+var IconA = L.icon({
+                    iconUrl: 'amanita.png',
+                    iconSize: [20, 40], // size of the icon
+                });
         
 var helvella_layer;
 var amanita_layer
@@ -75,7 +79,7 @@ function initialize() {
             console.log("Fungi data loaded!");
             helvella_layer = L.geoJson(data, {
                 onEachFeature: function(feature, layer, latlng) {
-                    marker = L.marker(latlng, {icon:_____});
+                    marker = L.marker(latlng, {icon:IconA});
                     layer.bindPopup("<b>Mushroom common name: " + feature.properties.common_name + "</b>");
                 }
             });
