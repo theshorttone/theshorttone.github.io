@@ -55,6 +55,10 @@ var IconA = L.icon({
                     iconUrl: 'amanita.png',
                     iconSize: [20, 40], // size of the icon
                 });
+var IconH = L.icon({
+                    iconUrl: 'helvella.png',
+                    iconSize: [20, 40], // size of the icon
+                });
         
 var helvella_layer;
 var amanita_layer
@@ -100,7 +104,8 @@ function initialize() {
         success: function(data) {
             console.log("Fungi data_2 loaded!");
             amanita_layer = L.geoJson(data, {
-                onEachFeature: function(feature, layer) {
+                onEachFeature: function(feature, layer, latlng) {
+                    marker = L.marker(latlng, {icon:IconH});
                     layer.bindPopup("<b>Mushroom common name: " + feature.properties.common_name + "</b>");
                 }
             });
