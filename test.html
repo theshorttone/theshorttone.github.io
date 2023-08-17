@@ -5,7 +5,6 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <script src="geodata.txt"></script>
     <link rel="stylesheet" href= "style.css">
     <style>
         #map {height: 700px; width: 100%; }
@@ -39,6 +38,9 @@
     <div id="buttons">
         <button id="togglehelvella">Click to show Helvella!</button>
     </div>
+     <div id="buttons">
+        <button id="toggleamanita">Click to show Amanita!</button>
+    </div>
     
    <div id="buttons">
     <label class="switch">
@@ -49,11 +51,19 @@
 </div>
 
     <script>
+var IconA = L.icon({
+                    iconUrl: 'amanita.png',
+                    iconSize: [20, 40], // size of the icon
+                });
+var IconH = L.icon({
+                    iconUrl: 'helvella.png',
+                    iconSize: [20, 40], // size of the icon
+                });
         
 var helvella_layer;
+var amanita_layer
+var amanitavisible = false;
 var helvellavisible = false;
-var heatmapvisible = false;
-var helvella_heatmap;
          var OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
             maxZoom: 17,
             attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
@@ -71,20 +81,76 @@ function initialize() {
         success: function(data) {
             console.log("Fungi data loaded!");
             helvella_layer = L.geoJson(data, {
-                onEachFeature: function(feature, layer) {
+                onEachFeature: function(feature, layer, latlng) {
+                    marker = L.marker(latlng, {icon:IconA});
                     layer.bindPopup("<b>Mushroom common name: " + feature.properties.common_name + "</b>");
                 }
             });
-    
-        helvella_heatmap = L.heatLayer(heatmapdata.features.map(function(feature) {
-            return [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
-        }), { radius: 20 });
 
-    },
-    error: function(xhr) {
-        alert(xhr.statusText);
-    }
+
+            
+        },
+        error: function(xhr) {
+            alert(xhr.statusText);
+        }
+    });
+
+ var response;
+      var markers = L.markerClusterGroup();
+
+  response = $.ajax({
+  url: "amanita_data.geojson",
+  dataType: "json",
+  success: function (data) {
+    console.log("Amanita data loaded");
+    amanita_layer = L.geoJSON(data, {
+      pointToLayer: function (feature, latlng) {
+        return L.marker(latlng, {
+          icon: L.icon({
+            iconUrl: "amanita.png",
+            iconSize: [8, 12],
+          })
+        });
+      },
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup("<b>Mushroom common name: " + feature.properties.common_name + "</b>");
+      }
+    });
+
+      markers.addLayer(amanita_layer); 
+
+        $("#toggleCluster").click(function () {
+          if (map.hasLayer(markers)) {
+            map.removeLayer(markers);
+          } else {
+            map.addLayer(markers);
+          }
+        });
+
+  },
+  error: function (xhr) {
+    alert(xhr.statusText);
+  }
 });
+
+
+    
+    //  $.ajax({
+    //     url: "amanita_data.geojson",
+    //     dataType: "json",
+    //     success: function(data) {
+    //         console.log("Fungi data_2 loaded!");
+    //         amanita_layer = L.geoJson(data, {
+    //             onEachFeature: function(feature, layer, latlng) {
+    //                 marker = L.marker(latlng, {icon:IconH});
+    //                 layer.bindPopup("<b>Mushroom common name: " + feature.properties.common_name + "</b>");
+    //             }
+    //         });
+    //     },
+    //     error: function(xhr) {
+    //         alert(xhr.statusText);
+    //     }
+    // });
 
     
  $("#togglehelvella").click(function() {
@@ -96,22 +162,17 @@ function initialize() {
                     helvella_layer.addTo(map);
                 }
             });
-    
-   $("#toggleheatmap").click(function () {
-                if (map.hasLayer(helvella_layer)) {
-                    map.removeLayer(helvella_layer);
-                }
-
-                if (heatmapvisible) {
-                    heatmapvisible = false;
-                    map.removeLayer(helvella_heatmap)
+    $("#toggleamanita").click(function() {
+                if (amanitavisible) {
+                    amanitavisible = false;
+                    map.removeLayer(amanita_layer);
                 } else {
-                    heatmapvisible = true;
-                    helvella_heatmap.addTo(map);
-        }
-    });
-}
-
+                    amanitavisible = true;
+                    amanita_layer.addTo(map);
+                }
+            });
+    
+ 
     </script>
 </body>
 </html>
