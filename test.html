@@ -105,7 +105,7 @@ function initialize() {
         return L.marker(latlng, {
           icon: L.icon({
             iconUrl: "amanita.png",
-            iconSize: [20, 30],
+            iconSize: [40, 60],
           })
         });
       },
@@ -129,45 +129,44 @@ function initialize() {
     alert(xhr.statusText);
   }
 });
+ var markers2 = L.markerClusterGroup();
 
+  response = $.ajax({
+  url: "helvella_data.geojson",
+  dataType: "json",
+  success: function (data) {
+    console.log("Helvella data loaded");
+    helvella_layer = L.geoJSON(data, {
+      pointToLayer: function (feature, latlng) {
+        return L.marker(latlng, {
+          icon: L.icon({
+            iconUrl: "helvella.png",
+            iconSize: [40, 60],
+          })
+        });
+      },
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup("<b>Mushroom common name: " + feature.properties.common_name + "</b>");
+      }
+    });
 
+      markers2.addLayer(helvella_layer); 
+
+        $("#toggleamanita").click(function () {
+          if (map.hasLayer(markers)) {
+            map.removeLayer(markers);
+          } else {
+            map.addLayer(markers);
+          }
+        });
+
+  },
+  error: function (xhr) {
+    alert(xhr.statusText);
+  }
+});
     
-    //  $.ajax({
-    //     url: "amanita_data.geojson",
-    //     dataType: "json",
-    //     success: function(data) {
-    //         console.log("Fungi data_2 loaded!");
-    //         amanita_layer = L.geoJson(data, {
-    //             onEachFeature: function(feature, layer, latlng) {
-    //                 marker = L.marker(latlng, {icon:IconH});
-    //                 layer.bindPopup("<b>Mushroom common name: " + feature.properties.common_name + "</b>");
-    //             }
-    //         });
-    //     },
-    //     error: function(xhr) {
-    //         alert(xhr.statusText);
-    //     }
-    // });
 
-    
- $("#togglehelvella").click(function() {
-                if (helvellavisible) {
-                    helvellavisible = false;
-                    map.removeLayer(helvella_layer);
-                } else {
-                    helvellavisible = true;
-                    helvella_layer.addTo(map);
-                }
-            });
-    $("#toggleamanita").click(function() {
-                if (amanitavisible) {
-                    amanitavisible = false;
-                    map.removeLayer(amanita_layer);
-                } else {
-                    amanitavisible = true;
-                    amanita_layer.addTo(map);
-                }
-            });
 }
  
     </script>
