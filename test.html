@@ -73,25 +73,7 @@ function initialize() {
         zoom: 8, 
         layers: [OpenTopoMap]
     });
-   $.ajax({
-        url: "Helvelladata.geojson",
-        dataType: "json",
-        success: function(data) {
-            console.log("Fungi data loaded!");
-            helvella_layer = L.geoJson(data, {
-                onEachFeature: function(feature, layer) {
-                    layer.bindPopup("<b>Mushroom common name: " + feature.properties.common_name + "</b>");
-                }
-            });
-
-
-            
-        },
-        error: function(xhr) {
-            alert(xhr.statusText);
-        }
-    });
-
+    
  var response;
       var markers = L.markerClusterGroup();
 
