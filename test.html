@@ -105,7 +105,7 @@ function initialize() {
         return L.marker(latlng, {
           icon: L.icon({
             iconUrl: "amanita.png",
-            iconSize: [40, 60],
+            iconSize: [80, 120],
           })
         });
       },
@@ -152,7 +152,7 @@ function initialize() {
 
       markers2.addLayer(helvella_layer); 
 
-        $("#toggleamanita").click(function () {
+        $("#togglehelvella").click(function () {
           if (map.hasLayer(markers)) {
             map.removeLayer(markers);
           } else {
