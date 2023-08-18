@@ -17,6 +17,41 @@ h3 {
     background-color: #F0F8FF;
 }
 
+
+        
+ 
+        fancy {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+ 
+        h2 {
+            font-size: 5em;
+            font-family: serif;
+            color: transparent;
+            text-align: center;
+            animation: effect 2s linear infinite;
+            \
+        }
+ 
+        @keyframes effect {
+            0% {
+                background: linear-gradient(
+                        #008000, #00FF00);
+                -webkit-background-clip: text;
+            }
+ 
+            100% {
+                background: linear-gradient(
+                        #3CE7D7, #000FFF);
+                -webkit-background-clip: text;
+            }
+        }
+    
+ 
+
 .title {
     background: url("mushrooms-4434962_1280.jpg");
     min-height: 100vh; /* Use viewport height for minimum height */
