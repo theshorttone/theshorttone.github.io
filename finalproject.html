@@ -2,12 +2,18 @@
 <html>
 <head>
     <title>Hello Fungal Friends!</title>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="leaflet.js"></script>
+
+    <script src="leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="leaflet.css" />
+    <link rel="stylesheet" href="MarkerCluster.css">
+    <link rel="stylesheet" href="MarkerCluster.Default.css">
+    
     <link rel="stylesheet" href= "style.css">
+    
     <style>
-        #map {height: 700px; width: 100%; }
+        #map {height: 700px; width: 100%; margin: 15px}
         html, body {height: 100%; margin: 0; padding: 0;}
         #buttons {padding: 10px; background: #95d8f5;}
     </style>
@@ -18,20 +24,47 @@
    
 <div class = "title">
             <div class = "ptext">
-                <span class = "border">
+                 <span class = "border">
+
                     Welcome Fungal Friends!
-                </span>
+                  </span>
             </div>
         </div>
+
+
+    <h1> Uh... why are we hearing more about mushrooms?</h1>
+    <p>
+No one wants to read a lot of text, so here is a video showing how cool mycorrhizal fungi are!</p>
+    <p>
+       <iframe width="560" height="315" src="https://www.youtube.com/embed/iboE8UZBgkM" frameborder="0" allowfullscreen></iframe>
+</p>
+    <p>
+In summary, most plants need mycorhizae to help get nutients and water, while the fungi depend on trees to supply them with photosynthetic sugars. 
+This map focusses on a subset of mycorhizal fungi, Ectomycorrhizae(EcM), since they produce the fuiting bodies we call mushrooms. Most fungi don't 
+produce mushrooms, but since EcM do, it is easier to map their distribution than those without above ground fruting bodies. 
+    </p>
+
     
- 
+<div id= "fancy">
+    <h2>Fun Fact! </h2>   
+</div>
+
+
+
+<h3>Mushroooms are only fruiting bodies, they are like the berries of fungi which have most of their mass underground</h3>
         
-        
-        
-    <p>As climate change and habitat fragmentation continue to threaten ecosystems worldwide, it is essential
-    to improve mapping technologies to understand how ecosystems are changing. While great strides have been made with plant and animal data,
-        fungal data has fallen quite far behind. Fungi are difficult to study and map becuase they spend most of their lives underground. 
     
+    <h1>Ok, Mushrooms are cool, but why map it?</h1>
+    <p>
+          Fungi live underground, and consequently we know much less about their distribution and range. Unlike vegetation which is all over google 
+        earth and ArcGIS, I struggled to find data on the distribution of Fungi. I remembered that while scientific maps don't exist yet, there is 
+        still a lot of citizen science data on mushroom distribution, and used <a href = "https://www.inaturalist.org" target = "blank"> inaturalist</a> to 
+        map fungal observations. I picked only two mycorhizal species, both of which I remembering being abundent in the Santa Monica Mountains and collecting 
+        for a tree restoration project I was a part of. The map below displays their distribution in North America as they are native to North America, 
+        and I don't really care about the distributions in places like Europe where it may have spread. 
+        
+        
+      
     </p>
     
     <div id="map"></div>
@@ -42,33 +75,25 @@
         <button id="toggleamanita">Click to show Amanita!</button>
     </div>
     
-   <div id="buttons">
+<!--    <div id="buttons">
     <label class="switch">
         <input type="checkbox" id="toggleheatmap">
         <span class="slider round"></span>
     </label>
     <span>Toggle Heatmap</span>
-</div>
-
-    <script>
-var IconA = L.icon({
-                    iconUrl: 'amanita.png',
-                    iconSize: [20, 40], // size of the icon
-                });
-var IconH = L.icon({
-                    iconUrl: 'helvella.png',
-                    iconSize: [20, 40], // size of the icon
-                });
-        
+</div> -->
+    
+    
+    <script>       
 var helvella_layer;
 var amanita_layer
 var amanitavisible = false;
 var helvellavisible = false;
-var helvella_heatmap;
-         var OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-            maxZoom: 17,
-            attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
-        });
+        var OpenTopoMap = L.tileLayer('https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png', {
+	maxZoom: 20,
+	attribution: '<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+});
+         
 
 function initialize() {
     var map = L.map('map', {
@@ -76,96 +101,105 @@ function initialize() {
         zoom: 8, 
         layers: [OpenTopoMap]
     });
-   $.ajax({
-        url: "Helvelladata.geojson",
-        dataType: "json",
-        success: function(data) {
-            console.log("Fungi data loaded!");
-            helvella_layer = L.geoJson(data, {
-                onEachFeature: function(feature, layer, latlng) {
-                    marker = L.marker(latlng, {icon:IconA});
-                    layer.bindPopup("<b>Mushroom common name: " + feature.properties.common_name + "</b>");
-                }
-            });
-
-// sakeLayer = L.geoJson(sakes_geojson, {
-//                     pointToLayer: function(feature, latlng) {
-//                         marker = L.marker(latlng, {icon:MyIcon2
-//                         });
-            
-        },
-        error: function(xhr) {
-            alert(xhr.statusText);
-        }
-    });
-     $.ajax({
-        url: "amanita_data.geojson",
-        dataType: "json",
-        success: function(data) {
-            console.log("Fungi data_2 loaded!");
-            amanita_layer = L.geoJson(data, {
-                onEachFeature: function(feature, layer, latlng) {
-                    marker = L.marker(latlng, {icon:IconH});
-                    layer.bindPopup("<b>Mushroom common name: " + feature.properties.common_name + "</b>");
-                }
-            });
-        },
-        error: function(xhr) {
-            alert(xhr.statusText);
-        }
-    });
-//     $.ajax({
-//     url: "Helvelladata.geojson",
-//     dataType: "json",
-//     success: function(data) {
-//         console.log("Fungi data loaded for heatmap!");
-//         amanita_heatmap = L.heatLayer(data.features.map(function(feature) {
-//             return [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
-//         }), { radius: 20 });
-
-//     },
-//     error: function(xhr) {
-//         alert(xhr.statusText);
-//     }
-// });
-
     
- $("#togglehelvella").click(function() {
-                if (helvellavisible) {
-                    helvellavisible = false;
-                    map.removeLayer(helvella_layer);
-                } else {
-                    helvellavisible = true;
-                    helvella_layer.addTo(map);
-                }
-            });
-    $("#toggleamanita").click(function() {
-                if (amanitavisible) {
-                    amanitavisible = false;
-                    map.removeLayer(amanita_layer);
-                } else {
-                    amanitavisible = true;
-                    amanita_layer.addTo(map);
-                }
-            });
-    
-   $("#toggleheatmap").click(function () {
-                if (map.hasLayer(helvella_layer)) {
-                    map.removeLayer(helvella_layer);
-                }
+ var response;
+      var markers = L.markerClusterGroup();
 
-                if (map.hasLayer(helvella_heatmap)) {
-                    map.removeLayer(helvella_heatmap);
-                } else {
-                    helvella_heatmap = L.heatLayer(data.features.map(function (feature) {
-                        return [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
-                    }), { radius: 20 });
-
-                    helvella_heatmap.addTo(map);
-        }
+  response = $.ajax({
+  url: "amanita_data.geojson",
+  dataType: "json",
+  success: function (data) {
+    console.log("Amanita data loaded");
+    amanita_layer = L.geoJSON(data, {
+      pointToLayer: function (feature, latlng) {
+        return L.marker(latlng, {
+          icon: L.icon({
+            iconUrl: "amanita.png",
+            iconSize: [100, 120],
+          })
+        });
+      },
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup("<b>Mushroom common name: " + feature.properties.common_name + "</b>");
+      }
     });
+
+      markers.addLayer(amanita_layer); 
+
+        $("#toggleamanita").click(function () {
+          if (map.hasLayer(markers)) {
+            map.removeLayer(markers);
+          } else {
+            map.addLayer(markers);
+          }
+        });
+
+  },
+  error: function (xhr) {
+    alert(xhr.statusText);
+  }
+});
+ var markers2 = L.markerClusterGroup();
+
+  response = $.ajax({
+  url: "Helvella_data.geojson",
+  dataType: "json",
+  success: function (data) {
+    console.log("Helvella data loaded");
+    helvella_layer = L.geoJSON(data, {
+      pointToLayer: function (feature, latlng) {
+        return L.marker(latlng, {
+          icon: L.icon({
+            iconUrl: "helvella.png",
+            iconSize: [80, 80],
+          })
+        });
+      },
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup("<b>Mushroom common name: " + feature.properties.common_name + "</b>");
+      }
+    });
+
+      markers2.addLayer(helvella_layer); 
+
+        $("#togglehelvella").click(function () {
+          if (map.hasLayer(markers2)) {
+            map.removeLayer(markers2);
+          } else {
+            map.addLayer(markers2);
+          }
+        });
+
+  },
+  error: function (xhr) {
+    alert(xhr.statusText);
+  }
+});
+    
+
 }
+ </script>
 
-    </script>
+    <h1>References</h1>
+        <p> 
+All data came from inaturalist. Only research grade entries were included. There are hundreds 
+of users who submitted observations. 
+    image credits:
+    </p>
+<div id = "refs">
+  <ul> 
+<a href = "https://inaturalist-open-data.s3.amazonaws.com/photos/5749655/original.jpeghttps://inaturalist-open-data.s3.amazonaws.com/photos/5749655/original.jpeg"><li>helvella photo</li> </a>
+<a href = " https://www.mykoweb.com/CAF/photos/large/Amanita_velosa_fs-02.jpg"><li>amanita photo</li> </a>
+<a href = "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSgEvxQf-KB9BrYEFfxHiwQXzsggGug1lILFjdzOseTkGHZ7Yc5"><li>title mushrooms photo</li> </a>
+  </ul>
+</div>
+
+<div id = "thanks">   
+    <p>
+Big thanks to Dr.Parr and Aletha for all their help. 
+    </p>
+</div>
+   
+    
 </body>
 </html>
